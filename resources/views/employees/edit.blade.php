@@ -27,9 +27,9 @@
                      <h3 class="card-title">Edit Employee Information</h3>
                    </div>
 
-                     <form  action="{{ route('employees.edit',$employees->id) }}" method="POST">
-                      @csrf
-                      @method('PUT')
+                    <form action="{{ route('employees.update', $employees->id) }}" method="POST">
+                    @csrf
+                    @method('PUT')
                        <div class="row card-body col-12">
                          <div class="form-group col-12">
                             <label

@@ -23,7 +23,7 @@
                         <td>{{ $employee->id }}</td>
                         <td>{{ $employee->fname }}</td>
                         <td>{{ $employee->lname }}</td>
-                        <td>{{ $employee->mname }}</td>
+                        <td>{{ $employee->midname }}</td>
                         <td>{{ $employee->age }}</td>
                         <td>{{ $employee->address }}</td>
                         <td>{{ $employee->zip }}</td>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class employee extends Model
@@ -12,7 +13,7 @@ class employee extends Model
     protected $fillable = [
         'fname',
         'lname',
-        'mname',
+        'midname',
         'age',
         'address',
         'zip',

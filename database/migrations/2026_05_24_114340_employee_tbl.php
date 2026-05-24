@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('fname');
             $table->string('lname');
-            $table->string('mname');
+            $table->string('midname');
             $table->integer('age');
             $table->string('address');
             $table->string('zip');

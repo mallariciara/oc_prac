@@ -1,63 +1,73 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
+use Response;
 use Illuminate\Http\Request;
+use App\Models\Employee;
 
 class EmployeeController extends Controller
 {
     public function index()
-    {
+    {   
         $employees = Employee::all();
-        return view('employee.index', compact('employees'));
+        return view ('employees.index', compact('employees'));
     }
 
     public function create()
     {
-        return view('employee.create');
+        return view ('employees.create');
     }
+
 
     public function store(Request $request)
     {
-        $request->validate([
-            'fname' => 'required',
-            'lname' => 'required',
-            'mname' => 'required',
-            'age' => 'required|integer',
-            'address' => 'required',
-            'zip' => 'required',
-        ]);
+    $request->validate([
+        'fname' => 'required|max:255|',
+        'lname' => 'required|max:255|',
+        'midname' => 'required|max:255|',
+        'age' => 'required|',
+        'address' => 'required|max:255|',
+        'zip' => 'required|',
+        
+    ]);
 
-        Employee::create($request->all());
-        return redirect()->route('employee.index')->with('success', 'Employee created successfully');
+    Employee::create($request->all());
+    return redirect()->route('employees.index');
     }
 
-    public function edit($id)
+    public function edit( int $id)
+    {
+        $employees = Employee::findOrFail($id);
+        return view ('employees.edit', compact('employees'));
+    }
+
+    public function update(Request $request, int $id) {
+        {
+            $request->validate([
+                'fname' => 'required|max:255|',
+                'lname' => 'required|max:255|',
+                'midname' => 'required|max:255|',
+                'age' => 'required|',
+                'address' => 'required|max:255|',
+                'zip' => 'required|',
+                
+            ]);
+        
+            Employee::findOrFail($id)->update($request->all());
+            return redirect ()->back()->with('status','Employee Updated Successfully!');
+            }
+    }
+
+    public function confirmDelete(int $id)
     {
         $employee = Employee::findOrFail($id);
-        return view('employee.edit', compact('employee'));
+        return view('employees.delete', compact('employee'));
     }
 
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'fname' => 'required',
-            'lname' => 'required',
-            'mname' => 'required',
-            'age' => 'required|integer',
-            'address' => 'required',
-            'zip' => 'required',
-        ]);
-
-        $employee = Employee::findOrFail($id);
-        $employee->update($request->all());
-        return redirect()->route('employee.index')->with('success', 'Employee updated successfully');
-    }
-
-    public function destroy($id)
-    {
+    public function delete(int $id){
         $employee = Employee::findOrFail($id);
         $employee->delete();
-        return redirect()->route('employee.index')->with('success', 'Employee deleted successfully');
+        return redirect()->route('employees.index')->with('status','Employee Deleted');
     }
 }

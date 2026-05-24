@@ -15,14 +15,17 @@ Route::middleware('auth')->group(function () {
 
     Route::get('users', [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
 
-    //student management
-    Route::get('employees', [\App\Http\Controllers\studentmngtController::class, 'index'])->name('employees.index');
-    Route::get('employees/create', [\App\Http\Controllers\studentmngtController::class, 'create'])->name('employees.create');
+    //employee management
+    Route::get('employees', [\App\Http\Controllers\EmployeeController::class, 'index'])->name('employees.index');
+    Route::get('employees/create', [\App\Http\Controllers\EmployeeController::class, 'create'])->name('employees.create');
 
-    Route::post('employees', [\App\Http\Controllers\studentmngtController::class, 'store'])->name('employees.store');
-    Route::put('employees/{id}/edit', [\App\Http\Controllers\studentmngtController::class, 'edit'])->name('employees.edit');
+    Route::post('employees', [\App\Http\Controllers\EmployeeController::class, 'store'])->name('employees.store');
+    Route::get('employees/{id}/edit', [\App\Http\Controllers\EmployeeController::class, 'edit'])->name('employees.edit');
 
-    Route::put('employees/{id}', [\App\Http\Controllers\studentmngtController::class, 'update'])->name('employees.update');
-    Route::delete('employees/{id}/delete', [\App\Http\Controllers\studentmngtController::class, 'destroy'])->name('employees.destroy');
+    Route::put('employees/{id}', [\App\Http\Controllers\EmployeeController::class, 'update'])->name('employees.update');
+    Route::delete('employees/{id}/delete', [\App\Http\Controllers\EmployeeController::class, 'delete'])->name('employees.delete');
+
+    Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
+    Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
 
 });
